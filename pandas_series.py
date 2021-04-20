@@ -274,3 +274,14 @@ fruits_series[fruits_series.apply(lambda str: "apple" in str)]
 dtype: object
 
 ## 9. Which string value contains the most vowels?
+
+def countvowels(str):
+    num_vowels = 0
+    for char in str:
+        if char in str in ["aeiouAEIOU"]:
+            num_vowels += 1
+        return str
+        
+            
+
+fruits_series.nlargest()

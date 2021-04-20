@@ -285,3 +285,68 @@ def countvowels(str):
             
 
 fruits_series.nlargest()
+
+
+
+
+##### Exercises Part III
+### Use pandas to create a Series named letters from the following string:
+
+###     'hnvidduckkqxwymbimkccexbkmqygkxoyndmcxnwqarhyffsjpsrabtjzsypmzadfavyrnndndvswreauxovncxtwzpwejilzjrmmbbgbyxvjtewqthafnbkqplarokkyydtubbmnexoypulzwfhqvckdpqtpoppzqrmcvhhpwgjwupgzhiofohawytlsiyecuproguy'
+
+string = 'hnvidduckkqxwymbimkccexbkmqygkxoyndmcxnwqarhyffsjpsrabtjzsypmzadfavyrnndndvswreauxovncxtwzpwejilzjrmmbbgbyxvjtewqthafnbkqplarokkyydtubbmnexoypulzwfhqvckdpqtpoppzqrmcvhhpwgjwupgzhiofohawytlsiyecuproguy'
+
+# 1. Which letter occurs the most frequently in the letters Series?
+
+letters = pd.Series(list(string))
+
+letters.value_counts()
+
+y    13
+p    12
+w    10
+m     9
+b     9
+k     9
+n     9
+q     8
+d     8
+c     8
+x     8
+h     8
+a     8
+o     8
+r     8
+v     7
+u     7
+z     7
+t     7
+j     6
+e     6
+f     6
+g     5
+i     5
+s     5
+l     4
+dtype: int64
+
+letters.value_counts().idxmax()
+y
+
+# 2. Which letter occurs the Least frequently?
+
+letters.value_counts().idxmin()
+l
+
+# 3. How many vowels are in the Series?
+if letters.isin(["aeiou"]):
+    letter_count = 0
+    for letter in letters in 
+
+# 4. How many consonants are in the Series?
+
+# 5. Create a Series that has all of the same letters but uppercased.
+
+# 6. Create a bar plot of the frequencies of the 6 most commonly occuring letters.
+
+## Use pandas to create a Series named numbers from the following list:

@@ -283,7 +283,7 @@ pd.merge(users, roles, how = "outer")
 pd.merge(users, roles, how = "outer").drop(columns = "role_id")
 
 
-# In[6]:
+# In[5]:
 
 
 # 5. Load the mpg dataset from PyDataset
@@ -292,7 +292,7 @@ from pydataset import data
 data("mpg")
 
 
-# In[7]:
+# In[6]:
 
 
 # 6. Output and read the documentation for the mpg dataset
@@ -307,7 +307,7 @@ data("mpg", show_doc = True)
 # R. 234 rows, and 11 columns/variables
 
 
-# In[9]:
+# In[7]:
 
 
 # 8. Check out your column names and perform any cleanup you may want on them
@@ -374,7 +374,7 @@ mpg["mileage_difference"] = (mpg["hwy"] - mpg["cty"])
 mpg
 
 
-# In[30]:
+# In[9]:
 
 
 # 13. Create a column named average_mileage like you did in the DataFrames exercises;
@@ -384,7 +384,7 @@ mpg["average_mileage"] = (mpg["hwy"] + mpg["cty"]) / 2
 mpg
 
 
-# In[29]:
+# In[10]:
 
 
 # 14. Create a new column on the mpg dataset named is_automatic that holds boolean values denoting
@@ -394,21 +394,22 @@ mpg["is_automatic"] = np.where(mpg["trans"].str.contains("auto"), True, False)
 mpg
 
 
-# In[82]:
+# In[17]:
 
 
 # Using the mpg dataset, find out which which manufacturer has the best miles per gallon on average?
 
 # mpg.#.groupby("manufacturer")#.count()##.head(1).iloc(:, )
-mpg.sort_values(by = "average_mileage", ascending = False).groupby("manufacturer").agg("mean").head(1)
+mpg.groupby("manufacturer").agg("mean").sort_values(by = "average_mileage", ascending = False).head(1).loc[:, "average_mileage"]
 
 
-# In[30]:
+# In[19]:
 
 
 # Do automatic or manual cars have better miles per gallon
 
-mpg.sort_values(["average_mileage", "is_automatic"], ascending = False).head(3)
+# mpg.sort_values(["average_mileage", "is_automatic"], ascending = False).head(3)
+mpg.groupby("is_automatic").agg("mean").sort_values(by = "average_mileage", ascending = False).loc[:, "average_mileage"]
 
 
 # In[ ]:

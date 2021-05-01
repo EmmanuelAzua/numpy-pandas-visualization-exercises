@@ -41,90 +41,90 @@ def get_db_url(username, password, host):
 url = get_db_url(username, password, host)
 
 
-# In[4]:
+# In[5]:
 
 
-tables = pd.read_sql("SHOW TABLES", url).drop(columns=['multiple_lines', 'C'])
+tables = pd.read_sql("SHOW TABLES", url)
 tables
 
 
-# In[5]:
+# In[6]:
 
 
 contract_types_structure = pd.read_sql('''DESCRIBE contract_types''', url)
 contract_types_structure
 
 
-# In[6]:
+# In[7]:
 
 
 customers_structure = pd.read_sql('''DESCRIBE customers''', url)
 customers_structure
 
 
-# In[7]:
+# In[8]:
 
 
 internet_service_types_structure = pd.read_sql('''DESCRIBE internet_service_types''', url)
 internet_service_types_structure
 
 
-# In[8]:
+# In[9]:
 
 
 payment_types_structure = pd.read_sql('''DESCRIBE payment_types''', url)
 payment_types_structure
 
 
-# In[9]:
+# In[10]:
 
 
 contract_types = pd.read_sql('''contract_types''', url)
 contract_types
 
 
-# In[10]:
+# In[11]:
 
 
 customers = pd.read_sql('''customers''', url)
 customers.head()
 
 
-# In[11]:
+# In[12]:
 
 
 customers.info()
 
 
-# In[12]:
+# In[13]:
 
 
 internet_service_types = pd.read_sql('''internet_service_types''', url)
 internet_service_types
 
 
-# In[13]:
+# In[14]:
 
 
 payment_types = pd.read_sql('''payment_types''', url)
 payment_types
 
 
-# In[14]:
+# In[15]:
 
 
 monthly_customers = customers[customers["contract_type_id"] == 1]
 monthly_customers
 
 
-# In[15]:
+# In[16]:
 
 
 pearsoncorr = customers.corr(method = 'pearson')
 pearsoncorr
 
 
-# In[16]:
+# In[17]:
 
 
 sns.heatmap(pearsoncorr, 
@@ -135,84 +135,84 @@ sns.heatmap(pearsoncorr,
             linewidth = 0.5)
 
 
-# In[17]:
+# In[18]:
 
 
 fig, first = plt.subplots(figsize=(15, 15))
 first = sns.scatterplot(data = customers, x = "tenure", y = "payment_type_id", hue = "churn")
 
 
-# In[18]:
+# In[19]:
 
 
 sns.relplot(data = customers, x = "tenure", y = "contract_type_id", hue = "churn")
 
 
-# In[19]:
+# In[20]:
 
 
 sns.violinplot(data = customers, x = "payment_type_id", y = "contract_type_id", hue = "churn")
 
 
-# In[20]:
+# In[21]:
 
 
 sns.pointplot(data = customers, x = "streaming_movies", y = "senior_citizen", hue = "churn")
 
 
-# In[21]:
+# In[22]:
 
 
 sns.relplot(data = customers, x = "tenure", y = "senior_citizen", hue = "churn")
 
 
-# In[22]:
+# In[23]:
 
 
 sns.lineplot(data = monthly_customers, x = "payment_type_id", y = "churn")
 
 
-# In[23]:
+# In[24]:
 
 
 yearly_customers = customers[customers["contract_type_id"] == 2]
 yearly_customers
 
 
-# In[24]:
+# In[25]:
 
 
 two_year_customers = customers[customers["contract_type_id"] == 3]
 two_year_customers
 
 
-# In[25]:
+# In[26]:
 
 
 sns.pairplot(data = monthly_customers)
 
 
-# In[46]:
+# In[27]:
 
 
 spreadsheet = pd.read_excel("Spreadsheets_Exercises_Solutions.xlsx", sheet_name = "mytable_customer_details_values", header = 1)
 spreadsheet
 
 
-# In[47]:
+# In[28]:
 
 
 spreadsheet.info()
 
 
-# In[49]:
+# In[29]:
 
 
 pearsoncorr = spreadsheet.corr(method = 'pearson')
 pearsoncorr
 
 
-# In[53]:
+# In[30]:
 
 
 plt.figure(figsize = (16,5))
@@ -225,71 +225,71 @@ sns.heatmap(pearsoncorr,
            center = 0)
 
 
-# In[55]:
+# In[31]:
 
 
 sns.pairplot(data = spreadsheet)
 
 
-# In[61]:
+# In[32]:
 
 
 sns.relplot(data = spreadsheet, x = "tenure", y = "average_monthly_charges", hue = "churn")
 
 
-# In[123]:
+# In[33]:
 
 
 monthly_customers = spreadsheet[spreadsheet["contract_type"] == 0]
 monthly_customers
 
 
-# In[137]:
+# In[34]:
 
 
 yearly_customers = spreadsheet[spreadsheet["contract_type"] == 1]
 yearly_customers
 
 
-# In[138]:
+# In[35]:
 
 
 twoyear_customers = spreadsheet[spreadsheet["contract_type"] == 2]
 twoyear_customers
 
 
-# In[124]:
+# In[36]:
 
 
 sns.pairplot(data = monthly_customers)
 
 
-# In[125]:
+# In[37]:
 
 
 sns.relplot(data = monthly_customers, x = "tenure", y = "average_monthly_charges", hue = "churn")
 
 
-# In[126]:
+# In[38]:
 
 
 sns.lineplot(data = monthly_customers, x = "payment_type", y = "average_monthly_charges", hue = "churn")
 
 
-# In[127]:
+# In[39]:
 
 
 sns.lineplot(data = monthly_customers, x = "is_senior_citizen", y = "average_monthly_charges", hue = "churn")
 
 
-# In[128]:
+# In[40]:
 
 
 pearsons4monthly = monthly_customers.corr(method = 'pearson')
 pearsons4monthly
 
 
-# In[129]:
+# In[41]:
 
 
 plt.figure(figsize = (16,5))
@@ -302,60 +302,102 @@ sns.heatmap(pearsons4monthly,
            center = 0)
 
 
-# In[130]:
+# In[42]:
 
 
 plt.figure(figsize = (25,10))
 sns.swarmplot(data = monthly_customers, x = "tenure", y = "payment_type", hue = "churn", size = 10)
 
 
-# In[131]:
+# In[43]:
 
 
 plt.figure(figsize = (16,5))
 sns.relplot(data = monthly_customers, x = "tenure", y = "payment_type", hue = "churn")
 
 
-# In[132]:
+# In[44]:
 
 
 sns.lineplot(data = monthly_customers, x = "payment_type", y = "tenure", hue = "churn")
 
 
-# In[133]:
+# In[45]:
 
 
 sns.relplot(data = monthly_customers, x = "has_phone", y = "tenure", hue = "churn")
 
 
-# In[134]:
+# In[46]:
 
 
 sns.relplot(data = monthly_customers, x = "has_internet", y = "tenure", hue = "churn")
 
 
-# In[135]:
+# In[47]:
 
 
 sns.relplot(data = monthly_customers, x = "has_phone_and_internet", y = "tenure", hue = "churn")
 
 
-# In[141]:
+# In[48]:
 
 
 sns.relplot(data = monthly_customers, x = "is_senior_citizen", y = "payment_type", hue = "churn")
 
 
-# In[210]:
+# In[118]:
 
 
-total_churners = spreadsheet.groupby(["has_churned"]).count().iloc[:,14].sort_values(ascending = True).head(1) #[spreadsheet['has_churned'] == True] #monthly_customers[monthly_customers["has_churned" == True]].value_counts()
+total_churners = spreadsheet.groupby(["contract_type_desc"])[["has_churned"]].count()#.iloc[:,14].sort_values(ascending = True).head(1) #[spreadsheet['has_churned'] == True] #monthly_customers[monthly_customers["has_churned" == True]].value_counts()
 total_churners
 
 
-# In[213]:
+# In[134]:
 
 
-churner_groups = spreadsheet.groupby(["contract_type", "has_churned"]).count().iloc[:,14].sort_values(ascending = True)
+churner_groups = spreadsheet.groupby(["contract_type_desc", "has_churned"]).count().iloc[:,14].sort_values(ascending = False)
 churner_groups
+
+
+# In[179]:
+
+
+total_churners = spreadsheet.groupby("contract_type_desc")[['has_churned']].sum().sort_values(by = "has_churned", ascending = False)
+total_churners
+
+
+# In[138]:
+
+
+monthly_churners = spreadsheet.groupby("contract_type_desc")[['has_churned']].sum().sort_values(by = "contract_type_desc", ascending = False).head(1)
+monthly_churners
+
+
+# In[140]:
+
+
+annual_churners = spreadsheet.groupby("contract_type_desc")[['has_churned']].sum().sort_values(by = "contract_type_desc", ascending = True).head(1)
+annual_churners
+
+
+# In[156]:
+
+
+biannual_churners = spreadsheet.groupby("contract_type_desc")[['has_churned']].sum().sort_values(by = "has_churned").head(1)
+biannual_churners
+#biannual_churners2 = biannual_churners[biannual_churners["contract_type_desc"] == "2 Year"]
+
+
+# In[191]:
+
+
+plt.xticks(rotation=45)
+total_churners_plot = sns.lineplot(data = total_churners)
+
+
+# In[ ]:
+
+
+
 
